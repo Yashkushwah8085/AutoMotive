@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-card: var(--card-bg);
+  --color-muted: var(--text-muted);
+  --color-navbar: var(--navbar-bg);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #f59e0b;
+  --primary-hover: #d97706;
+  --secondary: #f8fafc;
+  --card-bg: #ffffff;
+  --text-muted: #64748b;
+  --navbar-bg: rgba(255, 255, 255, 0.8);
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+[data-theme='dark'] {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --secondary: #0f172a;
+  --card-bg: #1e293b;
+  --text-muted: #94a3b8;
+  --navbar-bg: rgba(7, 17, 31, 0.85);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Custom Utilities */
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 rounded-lg font-bold transition-all hover:bg-primary-hover flex items-center justify-center gap-2;
+}
+
+.btn-outline {
+  @apply border border-foreground/20 bg-transparent text-foreground px-6 py-3 rounded-lg font-bold transition-all hover:bg-foreground/5 flex items-center justify-center gap-2;
+}
+
+.section-dark {
+  @apply bg-secondary text-foreground py-20;
+}
+
+.section-light {
+  @apply bg-background text-foreground py-20;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Animations from original design */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
